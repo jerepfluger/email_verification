@@ -4,7 +4,10 @@ from flask import Blueprint
 routes = Blueprint('routes', __name__)
 
 from .basic_controller import *
+<<<<<<< HEAD
 from .register_controller import *
+=======
+>>>>>>> fdbb4e7d4fd657f7b26bf0672d5ac6d4c3a2243b
 
 
 @routes.errorhandler(HTTPException)

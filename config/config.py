@@ -8,9 +8,9 @@ ALLOWED_ENVS = ['DEV', "BETA", 'PROD']
 ENVIRONMENT = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] in ALLOWED_ENVS else 'DEV'
 
 config_files = ['config.yaml']
-if ENVIRONMENT == 'BETA':
+if ENVIRONMENT.upper() == 'BETA':
     config_files.append('config-beta.yaml')
-if ENVIRONMENT == 'PROD':
+if ENVIRONMENT.upper() == 'PROD':
     config_files.append('config-prod.yaml')
 
 

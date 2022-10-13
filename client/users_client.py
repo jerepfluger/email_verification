@@ -1,5 +1,3 @@
-from http import HTTPStatus
-
 import requests
 
 from config.config import settings as config_file

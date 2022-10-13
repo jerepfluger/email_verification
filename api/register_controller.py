@@ -16,8 +16,13 @@ from . import routes
 @expects_json(RegisterDto.get_schema())
 def register():
     logger.info('Received sign up request. Starting to process request')
+    register_user_service = RegisterUserService()
     register_user_info = RegisterDto(**g.data)
-    register_user_response = RegisterUserService().register_user(register_user_info)
+    validation = register_user_service.validate_input(register_user_info)
+    if validation.status != 'success':
+        return jsonify(validation), HTTPStatus.BAD_REQUEST
+
+    register_user_response = register_user_service.register_user(register_user_info)
 
     logger.info('Testing')
 
