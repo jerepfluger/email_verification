@@ -1,6 +1,7 @@
 import requests
 
 from config.config import settings as config_file
+from domain.mock_requests import MockRequests
 
 
 class UsersClient:
@@ -9,4 +10,10 @@ class UsersClient:
 
     def get_user(self, email):
         url = f'{self.base_url}/user?email={email}'
-        return requests.get(url)
+        if email == 'return_500@gmail.com':
+            return MockRequests(500)
+        if email == 'return_200@gmail.com':
+            return MockRequests(200)
+
+        # return requests.get(url)
+        return MockRequests(404)
