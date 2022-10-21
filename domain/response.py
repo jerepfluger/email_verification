@@ -1,18 +1,12 @@
-import json
-from typing import NewType, Union
-
-from helpers.constants import StatusEnum
-
-StatusValues = NewType('StatusValues', Union[StatusEnum.SUCCESS, StatusEnum.ERROR, StatusEnum.INTERNAL_ERROR])
-
-
 class Response:
-    def __init__(self, status: StatusValues, message):
-        self.status = status
-        self.message = message
+    def __init__(self, code, name, description):
+        self.code = code
+        self.name = name
+        self.description = description
 
     def to_json(self):
         return {
-            'status': self.status,
-            'message': self.message
+            'code': self.code,
+            'name': self.name,
+            'description': self.description
         }

@@ -1,8 +1,11 @@
 env: "beta"
 api:
-  name: "flask_skeleton"
+  url: "localhost"
+  name: "email_verification"
   port: 9290
 
+users:
+  url: "localhost"
 
 db:
   engine: "mysql"
