@@ -3,7 +3,7 @@ import re
 from client.users_client import UsersClient
 from config.config import settings as config_file
 from exceptions.exceptions import BadRequestException
-from helpers.constants import ErrorMessages
+from helpers.constants import ErrorMessages, RedisDefaultExpiryTime
 from helpers.logger import logger
 from helpers.password_encryptor import password_encryptor
 from service.email_service import EmailService
@@ -59,14 +59,14 @@ class RegisterService:
         encrypted_password = password_encryptor(user_info.password)
         redis_object = {'email': user_info.email, 'password': encrypted_password}
 
-        uu_id = self.redis_service.save_info(redis_object)
+        uu_id = self.redis_service.save_info(redis_object, expiry=RedisDefaultExpiryTime.TEN_MINUTES)
         logger.info('Successfully saved information into redis')
 
         return uu_id
 
     def email_uuid_to_user(self, email, uu_id):
         logger.info('Creating email information to be sent to user')
-        return_url = f'http://{config_file.api.url}:{config_file.api.port}/validate?id={uu_id}'
+        return_url = f'http://{config_file.api.host}:{config_file.api.port}/validate?id={uu_id}'
         self.email_service.send_verification_email(email, return_url)
 
         logger.info('Successfully sent email to user')

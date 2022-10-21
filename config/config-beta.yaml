@@ -1,11 +1,15 @@
 env: "beta"
 api:
-  url: "localhost"
+  host: "localhost"
   name: "email_verification"
   port: 9290
 
 users:
-  url: "localhost"
+  host: "localhost"
+
+redis:
+  host: "localhost"
+  port: 6379
 
 db:
   engine: "mysql"
